@@ -5,13 +5,17 @@ interface TodoItemProps {
     id: number;
     text: string;
   };
+  onDelete: (id: number) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete }) => {
   return (
-    <>
-      <p>{todo.text}</p>
-    </>
+    <div style={{ display: "flex", alignItems: "center", marginBottom: '8px' }}>
+      <>
+        <p>{todo.text}</p>
+        <button onClick={() => onDelete(todo.id)}>削除</button>
+      </>
+    </div>
   );
 };
 

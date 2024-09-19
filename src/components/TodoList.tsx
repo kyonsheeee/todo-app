@@ -15,6 +15,10 @@ const TodoList: React.FC = () => {
     setInput("");
   };
 
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
   return (
     <>
       <input
@@ -24,7 +28,7 @@ const TodoList: React.FC = () => {
       ></input>
       <button onClick={addTodo}>追加</button>
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} onDelete={deleteTodo} />
       ))}
     </>
   );
