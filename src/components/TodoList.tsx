@@ -16,7 +16,13 @@ const TodoList: React.FC = () => {
   };
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const editTodo = (id: number, newText: string) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
+    );
   };
 
   return (
@@ -28,7 +34,12 @@ const TodoList: React.FC = () => {
       ></input>
       <button onClick={addTodo}>追加</button>
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} onDelete={deleteTodo} />
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onDelete={deleteTodo}
+          onEdit={editTodo}
+        />
       ))}
     </>
   );
