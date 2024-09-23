@@ -31,6 +31,7 @@ const TodoList: React.FC = () => {
         placeholder="TODOを追加"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        style={{ marginRight: "8px" }}
       ></input>
       <button onClick={addTodo}>追加</button>
       {todos.map((todo) => (
