@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
+import "../styles/TodoList.css";
 
 interface Todo {
   id: number;

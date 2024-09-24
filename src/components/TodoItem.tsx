@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/TodoItem.css';
 
 interface TodoItemProps {
   todo: {
@@ -41,7 +42,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div className={`todo-item ${todo.completed ? 'completed' : ''}`}>
       <input
         type="checkbox"
         checked={todo.completed}

@@ -1,0 +1,45 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  transition: back-ground-color 0.3s;
+}
+
+.todo-item p {
+  margin: 0;
+  flex: 1;
+}
+
+.todo-item.completed {
+  text-decoration: line-through;
+  background-color: #d4edda;
+}
+
+.todo-item button {
+  margin-left: 10px;
+}
+
+.todo-item input[type="text"] {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.todo-item input[type="date"] {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .todo-item input[type="text"],
+  .todo-item input[type="date"],
+  .todo-item select,
+  .todo-item button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
