@@ -8,7 +8,7 @@ interface TodoItemProps {
     dueDate: string;
   };
   onDelete: (id: number) => void;
-  onEdit: (id: number, newText: string) => void;
+  onEdit: (id: number, newText: string, newDueDate: string) => void;
   onToggle: (id: number) => void;
 }
 
@@ -20,13 +20,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(todo.text);
+  const [newDueDate, setNewDueDate] = useState(todo.dueDate);
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
   const handleSave = () => {
-    onEdit(todo.id, newText);
+    onEdit(todo.id, newText, newDueDate);
     setIsEditing(false);
   };
 
@@ -43,6 +44,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
           <input
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
+            style={{ marginRight: "8px" }}
+          ></input>
+          <input
+            type="date"
+            value={newDueDate}
+            onChange={(e) => setNewDueDate(e.target.value)}
             style={{ marginRight: "8px" }}
           ></input>
           <button onClick={handleSave} style={{ marginRight: "8px" }}>

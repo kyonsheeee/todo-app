@@ -14,17 +14,23 @@ const TodoList: React.FC = () => {
   const [dueDate, setDueDate] = useState("");
 
   const addTodo = () => {
-    setTodos([...todos, { id: Date.now(), text: input, completed: false, dueDate }]);
+    setTodos([
+      ...todos,
+      { id: Date.now(), text: input, completed: false, dueDate },
+    ]);
     setInput("");
+    setDueDate("");
   };
 
   const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const editTodo = (id: number, newText: string) => {
+  const editTodo = (id: number, newText: string, newDueDate: string) => {
     setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, text: newText, dueDate: newDueDate } : todo
+      )
     );
   };
 
