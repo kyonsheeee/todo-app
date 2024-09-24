@@ -65,7 +65,7 @@ const TodoList: React.FC = () => {
         placeholder="TODOを追加"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        style={{ marginRight: "8px" }}
+        style={{ marginRight: "8px", marginBottom: '10px' }}
       ></input>
       <input
         type="date"
