@@ -60,6 +60,7 @@ const TodoList: React.FC = () => {
   return (
     <>
       <input
+        type="text"
         placeholder="TODOを追加"
         value={input}
         onChange={(e) => setInput(e.target.value)}

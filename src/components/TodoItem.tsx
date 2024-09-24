@@ -51,6 +51,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
       {isEditing ? (
         <>
           <input
+            type="text"
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
             style={{ marginRight: "8px" }}
