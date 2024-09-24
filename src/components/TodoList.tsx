@@ -4,6 +4,7 @@ import TodoItem from "./TodoItem";
 interface Todo {
   id: number;
   text: string;
+  completed: boolean;
 }
 
 const TodoList: React.FC = () => {
@@ -11,7 +12,7 @@ const TodoList: React.FC = () => {
   const [input, setInput] = useState("");
 
   const addTodo = () => {
-    setTodos([...todos, { id: Date.now(), text: input }]);
+    setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
     setInput("");
   };
 
@@ -22,6 +23,14 @@ const TodoList: React.FC = () => {
   const editTodo = (id: number, newText: string) => {
     setTodos(
       todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
+    );
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
     );
   };
 
@@ -40,6 +49,7 @@ const TodoList: React.FC = () => {
           todo={todo}
           onDelete={deleteTodo}
           onEdit={editTodo}
+          onToggle={toggleTodo}
         />
       ))}
     </>
