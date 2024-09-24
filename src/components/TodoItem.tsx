@@ -5,6 +5,7 @@ interface TodoItemProps {
     id: number;
     text: string;
     completed: boolean;
+    dueDate: string;
   };
   onDelete: (id: number) => void;
   onEdit: (id: number, newText: string) => void;
@@ -56,7 +57,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
               textDecoration: todo.completed ? "line-through" : "none",
             }}
           >
-            {todo.text}
+            {todo.text} (期限: {todo.dueDate})
           </p>
           <button onClick={handleEdit} style={{ marginRight: "8px" }}>
             編集

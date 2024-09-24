@@ -5,14 +5,16 @@ interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  dueDate: string;
 }
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const addTodo = () => {
-    setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
+    setTodos([...todos, { id: Date.now(), text: input, completed: false, dueDate }]);
     setInput("");
   };
 
@@ -40,6 +42,12 @@ const TodoList: React.FC = () => {
         placeholder="TODOを追加"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        style={{ marginRight: "8px" }}
+      ></input>
+      <input
+        type="date"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
         style={{ marginRight: "8px" }}
       ></input>
       <button onClick={addTodo}>追加</button>
