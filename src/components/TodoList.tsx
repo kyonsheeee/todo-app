@@ -86,10 +86,15 @@ const TodoList: React.FC = () => {
 
   const sortTodos = (todos: Todo[]): Todo[] => {
     const sortedTodos = [...todos];
-    console.log(sortedTodos);
+    // console.log(sortedTodos);
     sortedTodos.sort((a, b) => {
       const priorityOrder = { high: 1, mid: 2, low: 3 };
-      return priorityOrder[a.priority] - priorityOrder[b.priority];
+      const priorityDiff =
+        priorityOrder[a.priority] - priorityOrder[b.priority];
+      if (priorityDiff === 0) {
+        return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+      }
+      return priorityDiff;
     });
     return sortedTodos;
   };
