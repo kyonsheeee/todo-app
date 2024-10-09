@@ -7,14 +7,14 @@ interface TodoItemProps {
     text: string;
     completed: boolean;
     dueDate: string;
-    priority: "高" | "中" | "低";
+    priority: "high" | "mid" | "low";
   };
   onDelete: (id: number) => void;
   onEdit: (
     id: number,
     newText: string,
     newDueDate: string,
-    newPriority: "高" | "中" | "低"
+    newPriority: "high" | "mid" | "low"
   ) => void;
   onToggle: (id: number) => void;
 }
@@ -28,7 +28,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(todo.text);
   const [newDueDate, setNewDueDate] = useState(todo.dueDate);
-  const [newPriority, setNewPriority] = useState<"高" | "中" | "低">(
+  const [newPriority, setNewPriority] = useState<"high" | "mid" | "low">(
     todo.priority
   );
 
@@ -66,13 +66,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
           <select
             value={newPriority}
             onChange={(e) =>
-              setNewPriority(e.target.value as "高" | "中" | "低")
+              setNewPriority(e.target.value as "high" | "mid" | "low")
             }
             style={{ marginRight: "8px" }}
           >
-            <option value="高">高</option>
-            <option value="中">中</option>
-            <option value="低">低</option>
+            <option value="high">高</option>
+            <option value="mid">中</option>
+            <option value="low">低</option>
           </select>
           <button onClick={handleSave} style={{ marginRight: "8px" }}>
             保存
@@ -86,7 +86,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
               textDecoration: todo.completed ? "line-through" : "none",
             }}
           >
-            {todo.text} (期限: {todo.dueDate}) (優先度: {todo.priority})
+            {todo.text} (期限: {todo.dueDate}) (優先度: {todo.priority === "high" ? "高" : todo.priority === "mid" ? "中" : "低"})
           </p>
           <button onClick={handleEdit} style={{ marginRight: "8px" }}>
             編集

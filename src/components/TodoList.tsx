@@ -7,14 +7,14 @@ interface Todo {
   text: string;
   completed: boolean;
   dueDate: string;
-  priority: "高" | "中" | "低";
+  priority: "high" | "mid" | "low";
 }
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [input, setInput] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [priority, setPriority] = useState<"高" | "中" | "低">("中");
+  const [priority, setPriority] = useState<"high" | "mid" | "low">("mid");
 
   const addTodo = () => {
     setTodos([
@@ -23,7 +23,7 @@ const TodoList: React.FC = () => {
     ]);
     setInput("");
     setDueDate("");
-    setPriority("中");
+    setPriority("mid");
   };
 
   const deleteTodo = (id: number) => {
@@ -34,7 +34,7 @@ const TodoList: React.FC = () => {
     id: number,
     newText: string,
     newDueDate: string,
-    newPriority: "高" | "中" | "低"
+    newPriority: "high" | "mid" | "low"
   ) => {
     setTodos(
       todos.map((todo) =>
@@ -75,12 +75,12 @@ const TodoList: React.FC = () => {
       ></input>
       <select
         value={priority}
-        onChange={(e) => setPriority(e.target.value as "高" | "中" | "低")}
+        onChange={(e) => setPriority(e.target.value as "high" | "mid" | "low")}
         style={{ marginRight: "8px" }}
       >
-        <option value="高">高</option>
-        <option value="中">中</option>
-        <option value="低">低</option>
+        <option value="high">高</option>
+        <option value="mid">中</option>
+        <option value="low">低</option>
       </select>
       <button onClick={addTodo}>追加</button>
       {todos.map((todo) => (
