@@ -37,10 +37,11 @@ const TodoList: React.FC = () => {
       return;
     }
 
-    setTodos([
+    const newTodos = [
       ...todos,
       { id: Date.now(), text: input, completed: false, dueDate, priority },
-    ]);
+    ];
+    setTodos(sortTodos(newTodos));
     setInput("");
     setDueDate("");
     setPriority("mid");
@@ -48,7 +49,7 @@ const TodoList: React.FC = () => {
   };
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos(sortTodos(todos.filter((todo) => todo.id !== id)));
   };
 
   const editTodo = (
@@ -58,25 +59,39 @@ const TodoList: React.FC = () => {
     newPriority: "high" | "mid" | "low"
   ) => {
     setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              text: newText,
-              dueDate: newDueDate,
-              priority: newPriority,
-            }
-          : todo
+      sortTodos(
+        todos.map((todo) =>
+          todo.id === id
+            ? {
+                ...todo,
+                text: newText,
+                dueDate: newDueDate,
+                priority: newPriority,
+              }
+            : todo
+        )
       )
     );
   };
 
   const toggleTodo = (id: number) => {
     setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      sortTodos(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        )
       )
     );
+  };
+
+  const sortTodos = (todos: Todo[]): Todo[] => {
+    const sortedTodos = [...todos];
+    console.log(sortedTodos);
+    sortedTodos.sort((a, b) => {
+      const priorityOrder = { high: 1, mid: 2, low: 3 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+    return sortedTodos;
   };
 
   return (
