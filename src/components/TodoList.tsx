@@ -15,8 +15,13 @@ const TodoList: React.FC = () => {
   const [input, setInput] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState<"high" | "mid" | "low">("mid");
+  const [error, setError] = useState("");
 
   const addTodo = () => {
+    if (input.trim() === "") {
+      setError("TODOを入力してください。");
+      return;
+    }
     setTodos([
       ...todos,
       { id: Date.now(), text: input, completed: false, dueDate, priority },
@@ -24,6 +29,7 @@ const TodoList: React.FC = () => {
     setInput("");
     setDueDate("");
     setPriority("mid");
+    setError("");
   };
 
   const deleteTodo = (id: number) => {
@@ -65,7 +71,7 @@ const TodoList: React.FC = () => {
         placeholder="TODOを追加"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        style={{ marginRight: "8px", marginBottom: '10px' }}
+        style={{ marginRight: "8px", marginBottom: "10px" }}
       ></input>
       <input
         type="date"
@@ -83,6 +89,7 @@ const TodoList: React.FC = () => {
         <option value="low">低</option>
       </select>
       <button onClick={addTodo}>追加</button>
+      {error && <p style={{ color: "red", fontSize: "12px" }}>{error}</p>}
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
