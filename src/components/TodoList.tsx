@@ -15,13 +15,28 @@ const TodoList: React.FC = () => {
   const [input, setInput] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState<"high" | "mid" | "low">("mid");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState<{ input: string; dueDate: string }>({
+    input: "",
+    dueDate: "",
+  });
 
   const addTodo = () => {
+    let inputError = "";
+    let dueDateError = "";
+
     if (input.trim() === "") {
-      setError("TODOを入力してください。");
+      inputError = "TODOを入力してください。";
+    }
+
+    if (dueDate.trim() === "") {
+      dueDateError = "期限を入力してください。";
+    }
+
+    if (inputError || dueDateError) {
+      setErrors({ input: inputError, dueDate: dueDateError });
       return;
     }
+
     setTodos([
       ...todos,
       { id: Date.now(), text: input, completed: false, dueDate, priority },
@@ -29,7 +44,7 @@ const TodoList: React.FC = () => {
     setInput("");
     setDueDate("");
     setPriority("mid");
-    setError("");
+    setErrors({ input: "", dueDate: "" });
   };
 
   const deleteTodo = (id: number) => {
@@ -89,7 +104,12 @@ const TodoList: React.FC = () => {
         <option value="low">低</option>
       </select>
       <button onClick={addTodo}>追加</button>
-      {error && <p style={{ color: "red", fontSize: "12px" }}>{error}</p>}
+      {errors.input && (
+        <p style={{ color: "red", fontSize: "12px" }}>{errors.input}</p>
+      )}
+      {errors.dueDate && (
+        <p style={{ color: "red", fontSize: "12px" }}>{errors.dueDate}</p>
+      )}
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
